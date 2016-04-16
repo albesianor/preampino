@@ -21,7 +21,7 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 #include <EEPROM.h>
 #include <SPI.h>
 
-#include "Byte2Bool.h"
+#include "Byte2Bool.hpp"
 
 
 // ------------------------------------------------------------------------
