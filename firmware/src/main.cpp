@@ -16,13 +16,14 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 #define EI_ARDUINO_INTERRUPTED_PIN
 
 // Includes
+#include <Arduino.h>
 #include <EnableInterrupt.h>
 #include <LiquidCrystal.h>
 #include <EEPROM.h>
 #include <SPI.h>
 #include <MIDI.h>
 
-#include "Byte2Bool.hpp"
+//#include "Byte2Bool.hpp"
 
 // TODO include defines
 
