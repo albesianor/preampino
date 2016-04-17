@@ -14,6 +14,8 @@ digipots values, keeps track of the status, saves and loads it to and from EEPRO
 #include <SPI.h>
 #include <EEPROM.h>
 
+#include <settings.h>
+
 enum AnalogPar{ fuzz_gain, dist_gain, boost_vol, vc1_gain, vc2_gain, vc_vol };
 enum DigitalPar{ fuzz, dist, clip_up, clip_down, boost, vc2 };
 

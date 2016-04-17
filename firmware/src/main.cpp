@@ -17,20 +17,19 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 
 // Includes
 #include <Arduino.h>
-#include <EnableInterrupt.h>
 #include <LiquidCrystal.h>
-#include <EEPROM.h>
-#include <SPI.h>
 #include <MIDI.h>
+
+#include <EnableInterrupt.h>
+
+#include <settings.h>
+#include <Device.h>
 
 //#include "Byte2Bool.hpp"
 
 // TODO include defines
 
 /*
-// Byte2Bool variable (see Byte2Bool.hpp)
-//Byte2Bool converter(6);
-
 
 // ------------------------------------------------------------------------
 // interrupt handlers
