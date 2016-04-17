@@ -7,8 +7,8 @@ This class represents the output: it changes the behaviour of the analog part co
 digipots values, keeps track of the status, saves and loads it to and from EEPROM
 */
 
-#ifndef PREAMPINO_DEVICE
-#define PREAMPINO_DEVICE
+#ifndef PREAMPINO_DEVICE_INTERFACE
+#define PREAMPINO_DEVICE_INTERFACE
 
 #include <Arduino.h>
 #include <SPI.h>

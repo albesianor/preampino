@@ -28,35 +28,6 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 // TODO include defines
 
 
-// ------------------------------------------------------------------------
-// data structures
-struct State
-{
-  // EEPROM position
-  byte address;
-
-  // "knobs state"
-  boolean fuzz;
-  byte fuzzGain;
-  boolean dist;
-  boolean clipUp;
-  boolean clipDown;
-  byte distGain;
-  boolean boost;
-  byte boostVolume;
-  byte vc1Gain;
-  boolean vc2;
-  byte vc2Gain;
-  byte vcVolume;
-};
-
-
-// ------------------------------------------------------------------------
-// variable declarations
-
-// status variable
-volatile State status;
-
 // Byte2Bool variable (see Byte2Bool.hpp)
 Byte2Bool converter(6);
 
