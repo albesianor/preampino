@@ -27,9 +27,9 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 
 // TODO include defines
 
-
+/*
 // Byte2Bool variable (see Byte2Bool.hpp)
-Byte2Bool converter(6);
+//Byte2Bool converter(6);
 
 
 // ------------------------------------------------------------------------
@@ -87,7 +87,7 @@ void handleProgramChange(byte channel, byte number)
 {
   load(number); // calls load function with address number
 }
-
+*/
 
 // ------------------------------------------------------------------------
 // setup function
