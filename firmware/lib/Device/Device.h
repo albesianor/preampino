@@ -16,17 +16,36 @@ digipots values, keeps track of the status, saves and loads it to and from EEPRO
 
 #include <settings.h>
 
-enum AnalogPar{ fuzz_gain, dist_gain, boost_vol, vc1_gain, vc2_gain, vc_vol };
-enum DigitalPar{ fuzz, dist, clip_up, clip_down, boost, vc2 };
-
 class Device
 {
 public:
   Device();
-  void setAnalog(AnalogPar type, byte value);
-  void setDigital(DigitalPar type, boolean value);
-  byte getAnalog(AnalogPar type);
-  boolean getDigital(DigitalPar type);
+
+  void setFuzz(boolean value);
+  void setFuzzGain(byte value);
+  void setDist(boolean value);
+  void setClipUp(boolean value);
+  void setClipDown(boolean value);
+  void setDistGain(byte value);
+  void setBoost(boolean value);
+  void setBoostVolume(byte value);
+  void setVC1Gain(byte value);
+  void setVC2(boolean value);
+  void setVC2Gain(byte value);
+  void setVCVolume(byte value);
+
+  boolean getFuzz()     { return _fuzz;         }
+  byte getFuzzGain()    { return _fuzz_gain;    }
+  boolean getDist()     { return _dist;         }
+  boolean getClipUp()   { return _clip_up;      }
+  boolean getClipDown() { return _clip_down;    }
+  byte getDistGain()    { return _dist_gain;    }
+  boolean getBoost()    { return _boost;        }
+  byte getBoostVolume() { return _boost_volume; }
+  byte getVC1Gain()     { return _vc1_gain;     }
+  boolean getVC2()      { return _vc2;          }
+  byte getVC2Gain()     { return _vc2_gain;     }
+  byte getVCVolume()    { return _vc_volume;    }
 
   void save();
   void save(byte address);
@@ -35,7 +54,7 @@ public:
 private:
   byte _address;
 
-  byte _fuzz_gain, _dist_gain, _boost_vol, _vc1_gain, _vc2_gain, _vc_vol;
+  byte _fuzz_gain, _dist_gain, _boost_volume, _vc1_gain, _vc2_gain, _vc_volume;
   boolean _fuzz, _dist, _clip_up, _clip_down, _boost, _vc2;
 };
 
