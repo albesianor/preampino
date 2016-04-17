@@ -38,5 +38,15 @@ Device::Device() {
   pinMode(oVC2, OUTPUT);
 
   _address = EEPROM.read(LASTPATCH);
-  load(_address);
+  load();
+}
+
+void Device::setFuzz(boolean value) {
+  digitalWrite(oFUZZ, value);
+  _fuzz = value;
+}
+
+void Device::setDist(boolean value) {
+  digitalWrite(oDIST, value);
+  _dist = value;
 }

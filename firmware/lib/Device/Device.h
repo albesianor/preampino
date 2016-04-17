@@ -33,6 +33,7 @@ public:
   void setVC2(boolean value);
   void setVC2Gain(byte value);
   void setVCVolume(byte value);
+  void setAddress(byte address);
 
   boolean getFuzz()     { return _fuzz;         }
   byte getFuzzGain()    { return _fuzz_gain;    }
@@ -46,10 +47,10 @@ public:
   boolean getVC2()      { return _vc2;          }
   byte getVC2Gain()     { return _vc2_gain;     }
   byte getVCVolume()    { return _vc_volume;    }
+  byte getAddress()     { return _address;      }
 
   void save();
-  void save(byte address);
-  void load(byte address);
+  void load();
 
 private:
   byte _address;
