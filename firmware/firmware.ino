@@ -20,8 +20,11 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 #include <LiquidCrystal.h>
 #include <EEPROM.h>
 #include <SPI.h>
+#include <MIDI.h>
 
 #include "Byte2Bool.hpp"
+
+// TODO include defines
 
 
 // ------------------------------------------------------------------------
@@ -53,7 +56,7 @@ struct State
 // status variable
 volatile State status;
 
-// Byte2Bool variable (see Byte2Bool.h)
+// Byte2Bool variable (see Byte2Bool.hpp)
 Byte2Bool converter(6);
 
 
@@ -104,6 +107,13 @@ void boost_h()
 void vc2_h()
 {
   status.vc2 = !status.vc2;
+}
+
+// ------------------------------------------------------------------------
+// MIDI handlers
+void handleProgramChange(byte channel, byte number)
+{
+  load(number); // calls load function with address number
 }
 
 
