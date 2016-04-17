@@ -22,6 +22,7 @@ enum DigitalPar{ fuzz, dist, clip_up, clip_down, boost, vc2 };
 class Device
 {
 public:
+  Device();
   void setAnalog(AnalogPar type, byte value);
   void setDigital(DigitalPar type, boolean value);
   byte getAnalog(AnalogPar type);
