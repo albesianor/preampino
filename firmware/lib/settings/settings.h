@@ -56,7 +56,10 @@ This header file contains the settings regarding pins configuration
 // ---------------------------------------------------------
 // EEPROM
 #define LASTPATCH  0
-#define DATADIM   10      // this is the size in the EEPROM of a single patch, in bytes
+#define PATCHDIM   7      // this is the size in the EEPROM of a single patch, in bytes
+#define NPATCHES 200      // actually the maximum number of patches that can be stored in Mega2560 EEPROM
+                          // is over 500, the fact that is set to 200 is because you won't normally use more
+                          // than 200 patches in your bank (and that are a lot). Anyway, it can be increased
 
 // ---------------------------------------------------------
 // LCD
