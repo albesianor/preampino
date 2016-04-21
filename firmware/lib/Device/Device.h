@@ -33,7 +33,7 @@ public:
   void setVC2(boolean value);
   void setVC2Gain(byte value);
   void setVCVolume(byte value);
-  void setAddress(byte address);
+  void setAddress(byte newaddress) { _address = newaddress % NPATCHES; }
 
   boolean getFuzz()     { return _fuzz;         }
   byte getFuzzGain()    { return _fuzz_gain;    }
@@ -47,13 +47,13 @@ public:
   boolean getVC2()      { return _vc2;          }
   byte getVC2Gain()     { return _vc2_gain;     }
   byte getVCVolume()    { return _vc_volume;    }
-  byte getAddress()     { return _address;      }
+  int getAddress()      { return _address;      }
 
   void save();
   void load();
 
 private:
-  byte _address;
+  byte _address; // address of the patch
 
   byte _fuzz_gain, _dist_gain, _boost_volume, _vc1_gain, _vc2_gain, _vc_volume;
   boolean _fuzz, _dist, _clip_up, _clip_down, _boost, _vc2;
