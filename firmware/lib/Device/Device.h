@@ -15,6 +15,7 @@ digipots values, keeps track of the status, saves and loads it to and from EEPRO
 #include <EEPROM.h>
 
 #include <settings.h>
+#include <utils.h>
 
 class Device
 {
