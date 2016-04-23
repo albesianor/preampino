@@ -25,10 +25,13 @@ This header file contains the settings regarding pins configuration
 #define iVC2_GAIN     0
 #define iVC_VOLUME    0
 
-#define UP            0
-#define DOWN          0
-#define SAVE          0
-#define CANCEL        0
+#define iUP           1
+#define iDOWN         2
+#define iSAVE         3
+#define iCANCEL       4
+
+// debounce delay
+#define DEBOUNCE_DELAY 100    // in ms
 
 // ---------------------------------------------------------
 // output
