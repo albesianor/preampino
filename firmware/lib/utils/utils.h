@@ -15,7 +15,7 @@ Utils
 
 // ---------------------------------------------------------
 // helper function to write to digipot via SPI
-void digitalPotWrite(int address, int value) {
+inline void digitalPotWrite(int address, int value) {
   // take the SS pin low to select the chip:
   digitalWrite(DP_SLAVE_SELECT, LOW);
   //  send in the address and value via SPI:
@@ -27,7 +27,7 @@ void digitalPotWrite(int address, int value) {
 
 // ---------------------------------------------------------
 // power operator helper function
-int power(int base, int exp)
+inline int power(int base, int exp)
 {
     int result = 1;
     while(exp) {
@@ -38,7 +38,7 @@ int power(int base, int exp)
 }
 
 // bool array to byte converter
-byte bool2byte(boolean* input, int dim = 6) {
+inline byte bool2byte(boolean* input, int dim = 6) {
   byte output = 0;
   for(int i = 0; i < dim; i++)
       output += input[i] * power(2,i);
@@ -46,7 +46,7 @@ byte bool2byte(boolean* input, int dim = 6) {
 }
 
 // byte to bool array converter
-boolean* byte2bool(byte input, int dim = 6) {
+inline boolean* byte2bool(byte input, int dim = 6) {
   boolean* output = new boolean[dim];
   for(int i = 0; i < dim; i++){
     output[i] = input % 2;
