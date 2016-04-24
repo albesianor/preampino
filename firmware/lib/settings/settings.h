@@ -34,6 +34,10 @@ This header file contains the settings regarding pins configuration
 #define DEBOUNCE_DELAY 100    // in ms
 
 // ---------------------------------------------------------
+// MIDI
+#define MIDI_INPUT_PORT Serial2
+
+// ---------------------------------------------------------
 // output
 
 // NOTE: the pins associated to analog outputs (i.e. gains and volumes) are referred

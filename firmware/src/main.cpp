@@ -28,6 +28,9 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 // variables definition
 Device d;
 uint32_t last_interrupt_time = 0;
+byte analogValue = 0;
+
+MIDI_CREATE_INSTANCE(HardwareSerial, MIDI_INPUT_PORT, MIDI);
 
 // ------------------------------------------------------------------------
 // interrupt handlers
@@ -138,13 +141,42 @@ void vc2_h()
 
 // ------------------------------------------------------------------------
 // MIDI handlers
-void handleProgramChange(byte channel, byte number)
+void programChange_h(byte channel, byte number)
 {
   d.setAddress(number);
   d.load(); // calls load function with address number
 }
 
 // ------------------------------------------------------------------------
+// start and stop interrupt facilities
+void startInterrupts()
+{
+  enableInterrupt(iFUZZ, fuzz_h, LOW);
+  enableInterrupt(iDIST, dist_h, LOW);
+  enableInterrupt(iCLIP_UP, clipUp_h, LOW);
+  enableInterrupt(iCLIP_DOWN, clipDown_h, LOW);
+  enableInterrupt(iBOOST, boost_h, LOW);
+  enableInterrupt(iVC2, vc2_h, LOW);
+  enableInterrupt(iUP, up_h, CHANGE);
+  enableInterrupt(iDOWN, down_h, CHANGE);
+  enableInterrupt(iSAVE, save_h, CHANGE);
+  enableInterrupt(iCANCEL, cancel_h, CHANGE);
+}
+
+void stopInterrupts()
+{
+  disableInterrupt(iFUZZ);
+  disableInterrupt(iDIST);
+  disableInterrupt(iCLIP_UP);
+  disableInterrupt(iCLIP_DOWN);
+  disableInterrupt(iBOOST);
+  disableInterrupt(iVC2);
+  disableInterrupt(iUP);
+  disableInterrupt(iDOWN);
+  disableInterrupt(iSAVE);
+  disableInterrupt(iCANCEL);
+}
+
 // ------------------------------------------------------------------------
 // setup
 void setup()
@@ -161,22 +193,43 @@ void setup()
   pinMode(iSAVE, INPUT_PULLUP);
   pinMode(iCANCEL, INPUT_PULLUP);
 
-  // register interrupt callback functions
-  enableInterrupt(iFUZZ, fuzz_h, LOW);
-  enableInterrupt(iDIST, dist_h, LOW);
-  enableInterrupt(iCLIP_UP, clipUp_h, LOW);
-  enableInterrupt(iCLIP_DOWN, clipDown_h, LOW);
-  enableInterrupt(iBOOST, boost_h, LOW);
-  enableInterrupt(iVC2, vc2_h, LOW);
-  enableInterrupt(iUP, up_h, CHANGE);
-  enableInterrupt(iDOWN, down_h, CHANGE);
-  enableInterrupt(iSAVE, save_h, CHANGE);
-  enableInterrupt(iCANCEL, cancel_h, CHANGE);
+  // start interrupt callback functions
+  startInterrupts();
+
+  // MIDI
+  MIDI.setHandleProgramChange(programChange_h);
+  MIDI.begin(MIDI_CHANNEL_OMNI);
+
 }
 
 // ------------------------------------------------------------------------
 // loop
 void loop()
 {
+  // fuzz gain
+  analogValue = map(analogRead(iFUZZ_GAIN), 0, 1023, 0, 255);
+  if(analogValue != d.getFuzzGain()) d.setFuzzGain(analogValue);
 
+  // dist gain
+  analogValue = map(analogRead(iDIST_GAIN), 0, 1023, 0, 255);
+  if(analogValue != d.getDistGain()) d.setDistGain(analogValue);
+
+  // boost volume
+  analogValue = map(analogRead(iBOOST_VOLUME), 0, 1023, 0, 255);
+  if(analogValue != d.getBoostVolume()) d.setBoostVolume(analogValue);
+
+  // first valvecaster gain
+  analogValue = map(analogRead(iVC1_GAIN), 0, 1023, 0, 255);
+  if(analogValue != d.getVC1Gain()) d.setVC1Gain(analogValue);
+
+  // second valvecaster gain
+  analogValue = map(analogRead(iVC2_GAIN), 0, 1023, 0, 255);
+  if(analogValue != d.getVC2Gain()) d.setVC2Gain(analogValue);
+
+  // valvecaster overall volume
+  analogValue = map(analogRead(iVC_VOLUME), 0, 1023, 0, 255);
+  if(analogValue != d.getVCVolume()) d.setVCVolume(analogValue);
+
+  // delay to avoid microcontroller overclocking
+  delay(100);
 }
