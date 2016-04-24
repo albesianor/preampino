@@ -27,6 +27,12 @@ well: if there is a Signal it goes into "slave mode" and checks whether the sign
 
 // variables definition
 Device d;
+LiquidCrystal lcd( LCD_RS,
+                   LCD_ENABLE,
+                   LCD_D4,
+                   LCD_D5,
+                   LCD_D6,
+                   LCD_D7 );
 uint32_t last_interrupt_time = 0;
 byte analogValue = 0;
 
@@ -41,8 +47,14 @@ void up_h()
   uint32_t interrupt_time = millis();
 
   if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+        // load
         d.setAddress(d.getAddress()+1);
         d.load();
+        // display
+        lcd.setCursor(13, 0);
+        lcd.print(d.getAddress());
+        lcd.setCursor(0, 1);
+        lcd.print("                ");
   }
 
   last_interrupt_time = interrupt_time;
@@ -53,8 +65,14 @@ void down_h()
   uint32_t interrupt_time = millis();
 
   if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+        // load
         d.setAddress(d.getAddress()-1);
         d.load();
+        // display
+        lcd.setCursor(13, 0);
+        lcd.print(d.getAddress());
+        lcd.setCursor(0, 1);
+        lcd.print("                ");
   }
 
   last_interrupt_time = interrupt_time;
@@ -83,8 +101,16 @@ void fuzz_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setFuzz(!d.getFuzz());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Fuzz");
+    lcd.setCursor(10, 1);
+    if(d.getFuzz()) lcd.print("ON");
+    else lcd.print("OFF");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -93,8 +119,16 @@ void dist_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setDist(!d.getDist());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Dist.");
+    lcd.setCursor(10, 1);
+    if(d.getDist()) lcd.print("ON");
+    else lcd.print("OFF");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -103,8 +137,16 @@ void clipUp_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setClipUp(!d.getClipUp());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Clip UP");
+    lcd.setCursor(10, 1);
+    if(d.getClipUp()) lcd.print("1N34A");
+    else lcd.print("1N4148");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -113,8 +155,16 @@ void clipDown_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setClipDown(!d.getClipDown());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Clip DOWN");
+    lcd.setCursor(10, 1);
+    if(d.getClipDown()) lcd.print("1N34A");
+    else lcd.print("1N4148");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -123,8 +173,16 @@ void boost_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setBoost(!d.getBoost());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Boost");
+    lcd.setCursor(10, 1);
+    if(d.getBoost()) lcd.print("ON");
+    else lcd.print("OFF");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -133,8 +191,16 @@ void vc2_h()
 {
   uint32_t interrupt_time = millis();
 
-  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY)
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    // set
     d.setVC2(!d.getVC2());
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("V.C. 2");
+    lcd.setCursor(10, 1);
+    if(d.getVC2()) lcd.print("ON");
+    else lcd.print("OFF");
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -145,6 +211,10 @@ void programChange_h(byte channel, byte number)
 {
   d.setAddress(number);
   d.load(); // calls load function with address number
+  lcd.setCursor(9, 0);
+  lcd.print(d.getAddress());
+  lcd.setCursor(0, 1);
+  lcd.print("            ");
 }
 
 // ------------------------------------------------------------------------
@@ -181,6 +251,13 @@ void stopInterrupts()
 // setup
 void setup()
 {
+  lcd.begin(16, 2);
+  lcd.noCursor();
+  lcd.setCursor(0, 0);
+  lcd.print("PREAMPino");
+  lcd.setCursor(0, 1);
+  lcd.print("Loading...");
+
   // register input pins
   pinMode(iFUZZ, INPUT_PULLUP);
   pinMode(iDIST, INPUT_PULLUP);
@@ -199,6 +276,16 @@ void setup()
   // MIDI
   MIDI.setHandleProgramChange(programChange_h);
   MIDI.begin(MIDI_CHANNEL_OMNI);
+
+  delay(1000);
+
+  // Displays current patch
+  lcd.setCursor(0, 0);
+  lcd.print("Patch");
+  lcd.setCursor(13, 0);
+  lcd.print(d.getAddress());
+  lcd.setCursor(0, 1);
+  lcd.print("                ");
 
 }
 

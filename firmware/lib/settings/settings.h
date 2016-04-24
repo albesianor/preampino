@@ -70,6 +70,11 @@ This header file contains the settings regarding pins configuration
 
 // ---------------------------------------------------------
 // LCD
-// TODO
+#define LCD_RS      0
+#define LCD_ENABLE  0
+#define LCD_D4      0
+#define LCD_D5      0
+#define LCD_D6      0
+#define LCD_D7      0
 
 #endif
