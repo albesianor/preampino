@@ -107,7 +107,7 @@ void fuzz_h()
     // display
     lcd.setCursor(0, 1);
     lcd.print("Fuzz");
-    lcd.setCursor(10, 1);
+    lcd.setCursor(13, 1);
     if(d.getFuzz()) lcd.print("ON");
     else lcd.print("OFF");
   }
@@ -125,7 +125,7 @@ void dist_h()
     // display
     lcd.setCursor(0, 1);
     lcd.print("Dist.");
-    lcd.setCursor(10, 1);
+    lcd.setCursor(13, 1);
     if(d.getDist()) lcd.print("ON");
     else lcd.print("OFF");
   }
@@ -179,7 +179,7 @@ void boost_h()
     // display
     lcd.setCursor(0, 1);
     lcd.print("Boost");
-    lcd.setCursor(10, 1);
+    lcd.setCursor(13, 1);
     if(d.getBoost()) lcd.print("ON");
     else lcd.print("OFF");
   }
@@ -196,8 +196,8 @@ void vc2_h()
     d.setVC2(!d.getVC2());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("V.C. 2");
-    lcd.setCursor(10, 1);
+    lcd.print("VC 2");
+    lcd.setCursor(13, 1);
     if(d.getVC2()) lcd.print("ON");
     else lcd.print("OFF");
   }
@@ -209,8 +209,10 @@ void vc2_h()
 // MIDI handlers
 void programChange_h(byte channel, byte number)
 {
+  // load
   d.setAddress(number);
-  d.load(); // calls load function with address number
+  d.load();
+  // display
   lcd.setCursor(9, 0);
   lcd.print(d.getAddress());
   lcd.setCursor(0, 1);
@@ -247,6 +249,7 @@ void stopInterrupts()
   disableInterrupt(iCANCEL);
 }
 
+// ------------------------------------------------------------------------
 // ------------------------------------------------------------------------
 // setup
 void setup()
@@ -295,27 +298,75 @@ void loop()
 {
   // fuzz gain
   analogValue = map(analogRead(iFUZZ_GAIN), 0, 1023, 0, 255);
-  if(analogValue != d.getFuzzGain()) d.setFuzzGain(analogValue);
+  if(analogValue != d.getFuzzGain()) {
+    // set
+    d.setFuzzGain(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Fuzz gain");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // dist gain
   analogValue = map(analogRead(iDIST_GAIN), 0, 1023, 0, 255);
-  if(analogValue != d.getDistGain()) d.setDistGain(analogValue);
+  if(analogValue != d.getDistGain()) {
+    // set
+    d.setDistGain(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Dist gain");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // boost volume
   analogValue = map(analogRead(iBOOST_VOLUME), 0, 1023, 0, 255);
-  if(analogValue != d.getBoostVolume()) d.setBoostVolume(analogValue);
+  if(analogValue != d.getBoostVolume()) {
+    // set
+    d.setBoostVolume(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("Boost vol");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // first valvecaster gain
   analogValue = map(analogRead(iVC1_GAIN), 0, 1023, 0, 255);
-  if(analogValue != d.getVC1Gain()) d.setVC1Gain(analogValue);
+  if(analogValue != d.getVC1Gain()) {
+    // set
+    d.setVC1Gain(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("VC 1 gain");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // second valvecaster gain
   analogValue = map(analogRead(iVC2_GAIN), 0, 1023, 0, 255);
-  if(analogValue != d.getVC2Gain()) d.setVC2Gain(analogValue);
+  if(analogValue != d.getVC2Gain()) {
+    // set
+    d.setVC2Gain(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("VC 2 gain");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // valvecaster overall volume
   analogValue = map(analogRead(iVC_VOLUME), 0, 1023, 0, 255);
-  if(analogValue != d.getVCVolume()) d.setVCVolume(analogValue);
+  if(analogValue != d.getVCVolume()) {
+    // set
+    d.setVCVolume(analogValue);
+    // display
+    lcd.setCursor(0, 1);
+    lcd.print("VC vol");
+    lcd.setCursor(13, 1);
+    lcd.print(analogValue);
+  }
 
   // delay to avoid microcontroller overclocking
   delay(100);
