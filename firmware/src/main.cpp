@@ -348,6 +348,9 @@ void setup()
 // loop
 void loop()
 {
+  // MIDI
+  MIDI.read();
+
   // fuzz gain
   analogValue = map(analogRead(iFUZZ_GAIN), 0, 1023, 0, 255);
   if(analogValue != d.getFuzzGain()) {
@@ -421,5 +424,5 @@ void loop()
   }
 
   // delay to avoid microcontroller overclocking
-  delay(100);
+  //delay(100); // removed to increase MIDI performances
 }
