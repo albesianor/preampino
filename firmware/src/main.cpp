@@ -36,6 +36,10 @@ LiquidCrystal lcd( LCD_RS,
 uint32_t last_interrupt_time = 0;
 byte analogValue = 0;
 
+// helper functions headers
+void startInterrupts();
+void stopInterrupts();
+
 MIDI_CREATE_INSTANCE(HardwareSerial, MIDI_INPUT_PORT, MIDI);
 
 // ------------------------------------------------------------------------
@@ -82,7 +86,55 @@ void save_h()
 {
   uint32_t interrupt_time = millis();
 
-  // TODO
+  if (interrupt_time - last_interrupt_time > DEBOUNCE_DELAY) {
+    stopInterrupts();
+
+    lcd.setCursor(0, 1);
+    lcd.print("Save in");
+    lcd.setCursor(9, 1);
+    lcd.print(d.getAddress());
+
+    byte lastaddress = d.getAddress();
+    boolean done = false;
+    while(!done) {
+
+      // if UP is pressed adds one to the address position but obviously doesn't load the new patch
+      if(digitalRead(iUP)) {
+        d.setAddress(d.getAddress()+1);
+        lcd.print(d.getAddress());
+      }
+
+      // as above, decreasing the position
+      if(digitalRead(iDOWN)) {
+        d.setAddress(d.getAddress()-1);
+        lcd.print(d.getAddress());
+      }
+
+      // if SAVE is pressed saves in the current position
+      if(digitalRead(iSAVE)) {
+        d.save();
+        lcd.setCursor(0, 1);
+        lcd.print("Saved           ");
+        done = true;
+      }
+
+      if(digitalRead(iCANCEL)) {
+        lcd.setCursor(0, 1);
+        lcd.print("                ");
+        done = true;
+      }
+
+      // delay to avoid processor overclocking
+      delay(100);
+    }
+
+    // resets the address to the one that d had before saving (so you can save on
+    // any position you desire without moving there)
+    d.setAddress(lastaddress);
+
+    startInterrupts();
+
+  }
 
   last_interrupt_time = interrupt_time;
 }
@@ -106,7 +158,7 @@ void fuzz_h()
     d.setFuzz(!d.getFuzz());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Fuzz");
+    lcd.print("Fuzz            ");
     lcd.setCursor(13, 1);
     if(d.getFuzz()) lcd.print("ON");
     else lcd.print("OFF");
@@ -124,7 +176,7 @@ void dist_h()
     d.setDist(!d.getDist());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Dist.");
+    lcd.print("Dist.           ");
     lcd.setCursor(13, 1);
     if(d.getDist()) lcd.print("ON");
     else lcd.print("OFF");
@@ -142,7 +194,7 @@ void clipUp_h()
     d.setClipUp(!d.getClipUp());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Clip UP");
+    lcd.print("Clip UP         ");
     lcd.setCursor(10, 1);
     if(d.getClipUp()) lcd.print("1N34A");
     else lcd.print("1N4148");
@@ -160,7 +212,7 @@ void clipDown_h()
     d.setClipDown(!d.getClipDown());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Clip DOWN");
+    lcd.print("Clip DOWN       ");
     lcd.setCursor(10, 1);
     if(d.getClipDown()) lcd.print("1N34A");
     else lcd.print("1N4148");
@@ -178,7 +230,7 @@ void boost_h()
     d.setBoost(!d.getBoost());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Boost");
+    lcd.print("Boost           ");
     lcd.setCursor(13, 1);
     if(d.getBoost()) lcd.print("ON");
     else lcd.print("OFF");
@@ -196,7 +248,7 @@ void vc2_h()
     d.setVC2(!d.getVC2());
     // display
     lcd.setCursor(0, 1);
-    lcd.print("VC 2");
+    lcd.print("VC 2            ");
     lcd.setCursor(13, 1);
     if(d.getVC2()) lcd.print("ON");
     else lcd.print("OFF");
@@ -232,7 +284,7 @@ void startInterrupts()
   enableInterrupt(iUP, up_h, CHANGE);
   enableInterrupt(iDOWN, down_h, CHANGE);
   enableInterrupt(iSAVE, save_h, CHANGE);
-  enableInterrupt(iCANCEL, cancel_h, CHANGE);
+  //enableInterrupt(iCANCEL, cancel_h, CHANGE);
 }
 
 void stopInterrupts()
@@ -246,7 +298,7 @@ void stopInterrupts()
   disableInterrupt(iUP);
   disableInterrupt(iDOWN);
   disableInterrupt(iSAVE);
-  disableInterrupt(iCANCEL);
+  //disableInterrupt(iCANCEL);
 }
 
 // ------------------------------------------------------------------------
@@ -271,7 +323,7 @@ void setup()
   pinMode(iUP, INPUT_PULLUP);
   pinMode(iDOWN, INPUT_PULLUP);
   pinMode(iSAVE, INPUT_PULLUP);
-  pinMode(iCANCEL, INPUT_PULLUP);
+  //pinMode(iCANCEL, INPUT_PULLUP);
 
   // start interrupt callback functions
   startInterrupts();
@@ -284,7 +336,7 @@ void setup()
 
   // Displays current patch
   lcd.setCursor(0, 0);
-  lcd.print("Patch");
+  lcd.print("Patch           ");
   lcd.setCursor(13, 0);
   lcd.print(d.getAddress());
   lcd.setCursor(0, 1);
@@ -303,7 +355,7 @@ void loop()
     d.setFuzzGain(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Fuzz gain");
+    lcd.print("Fuzz gain       ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
@@ -315,7 +367,7 @@ void loop()
     d.setDistGain(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Dist gain");
+    lcd.print("Dist. gain      ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
@@ -327,7 +379,7 @@ void loop()
     d.setBoostVolume(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("Boost vol");
+    lcd.print("Boost vol.      ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
@@ -339,7 +391,7 @@ void loop()
     d.setVC1Gain(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("VC 1 gain");
+    lcd.print("VC 1 gain       ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
@@ -351,7 +403,7 @@ void loop()
     d.setVC2Gain(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("VC 2 gain");
+    lcd.print("VC 2 gain       ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
@@ -363,7 +415,7 @@ void loop()
     d.setVCVolume(analogValue);
     // display
     lcd.setCursor(0, 1);
-    lcd.print("VC vol");
+    lcd.print("VC vol.         ");
     lcd.setCursor(13, 1);
     lcd.print(analogValue);
   }
