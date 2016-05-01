@@ -1,8 +1,8 @@
-update=ven 15 apr 2016 18:46:16 CEST
+update=ven 29 apr 2016 22:39:29 CEST
 last_client=eeschema
 [eeschema]
 version=1
-LibDir=
+LibDir=/usr/share/kicad/template/raspberrypi-gpio
 NetFmtName=
 RptD_X=0
 RptD_Y=100
@@ -39,3 +39,4 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
+LibName31=lib/arduino

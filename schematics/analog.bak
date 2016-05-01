@@ -763,6 +763,68 @@ F 3 "" H 12950 2450 60  0000 C CNN
 	1    12950 2450
 	0    -1   -1   0   
 $EndComp
+Text GLabel 15550 8500 2    60   Output ~ 0
+OUTPUT
+Text Notes 8300 9350 0    60   Italic 0
+Gain 2
+Text Notes 6800 6600 2    60   ~ 0
+TwinCaster
+Text Notes 6250 8350 2    60   Italic 0
+Second ValveCaster bypass
+Text Notes 7000 3900 2    60   Italic 0
+Gain
+Text Notes 8650 3600 2    60   Italic 0
+Clip up
+Text Notes 9350 3600 2    60   Italic 0
+Clip down
+Text Notes 4350 3450 2    60   Italic 0
+Gain
+Text Notes 6250 2750 2    60   Italic 0
+Dist Bypass
+Text Notes 11850 3350 2    60   Italic 0
+Boost bypass
+$Comp
+L +9V #PWR?
+U 1 1 53F61D03
+P 12850 7550
+F 0 "#PWR?" H 12850 7520 20  0001 C CNN
+F 1 "+9V" H 12850 7660 30  0000 C CNN
+F 2 "" H 12850 7550 60  0000 C CNN
+F 3 "" H 12850 7550 60  0000 C CNN
+	1    12850 7550
+	0    -1   -1   0   
+$EndComp
+Text Notes 1700 2900 0    60   Italic 0
+Fuzz Bypass
+$Comp
+L GND #PWR?
+U 1 1 53FDA19E
+P 14650 4400
+F 0 "#PWR?" H 14650 4400 30  0001 C CNN
+F 1 "GND" H 14650 4330 30  0001 C CNN
+F 2 "" H 14650 4400 60  0000 C CNN
+F 3 "" H 14650 4400 60  0000 C CNN
+	1    14650 4400
+	1    0    0    -1  
+$EndComp
+Text GLabel 5600 3050 2    60   UnSpc ~ 0
+SW6M
+Text GLabel 6300 2900 0    60   UnSpc ~ 0
+SW6A
+Text GLabel 6300 3200 0    60   UnSpc ~ 0
+SW6B
+Text GLabel 11150 3650 2    60   UnSpc ~ 0
+SW6M
+Text GLabel 11850 3500 0    60   UnSpc ~ 0
+SW6A
+Text GLabel 11850 3800 0    60   UnSpc ~ 0
+SW6B
+Text GLabel 5250 7950 2    60   UnSpc ~ 0
+SW6M
+Text GLabel 5950 7800 0    60   UnSpc ~ 0
+SW6A
+Text GLabel 5950 8100 0    60   UnSpc ~ 0
+SW6B
 Connection ~ 3650 9800
 Wire Wire Line
 	3650 9800 3650 9200
@@ -878,7 +940,6 @@ Wire Wire Line
 	7350 2400 7550 2400
 Wire Wire Line
 	10600 6850 10600 7950
-Connection ~ 10600 6850
 Wire Wire Line
 	6300 6850 10600 6850
 Wire Wire Line
@@ -1066,8 +1127,6 @@ Wire Notes Line
 	12250 7150 15300 7150
 Wire Notes Line
 	15300 9250 12250 9250
-Text GLabel 15550 8500 2    60   Output ~ 0
-OUTPUT
 Wire Wire Line
 	15100 8500 15550 8500
 Wire Wire Line
@@ -1076,37 +1135,6 @@ Wire Notes Line
 	1050 6700 11950 6700
 Wire Notes Line
 	11950 10100 1050 10100
-Text Notes 8300 9350 0    60   Italic 0
-Gain 2
-Text Notes 6800 6600 2    60   ~ 0
-TwinCaster
-Text Notes 6250 8350 2    60   Italic 0
-Second ValveCaster bypass
-Text Notes 7000 3900 2    60   Italic 0
-Gain
-Text Notes 8650 3600 2    60   Italic 0
-Clip up
-Text Notes 9350 3600 2    60   Italic 0
-Clip down
-Text Notes 4350 3450 2    60   Italic 0
-Gain
-Text Notes 6250 2750 2    60   Italic 0
-Dist Bypass
-Text Notes 11850 3350 2    60   Italic 0
-Boost bypass
-$Comp
-L +9V #PWR?
-U 1 1 53F61D03
-P 12850 7550
-F 0 "#PWR?" H 12850 7520 20  0001 C CNN
-F 1 "+9V" H 12850 7660 30  0000 C CNN
-F 2 "" H 12850 7550 60  0000 C CNN
-F 3 "" H 12850 7550 60  0000 C CNN
-	1    12850 7550
-	0    -1   -1   0   
-$EndComp
-Text Notes 1700 2900 0    60   Italic 0
-Fuzz Bypass
 Wire Wire Line
 	4400 3750 4500 3750
 Wire Wire Line
@@ -1144,17 +1172,6 @@ Wire Wire Line
 	7550 3900 7400 3900
 Wire Wire Line
 	14050 4750 12150 4750
-$Comp
-L GND #PWR?
-U 1 1 53FDA19E
-P 14650 4400
-F 0 "#PWR?" H 14650 4400 30  0001 C CNN
-F 1 "GND" H 14650 4330 30  0001 C CNN
-F 2 "" H 14650 4400 60  0000 C CNN
-F 3 "" H 14650 4400 60  0000 C CNN
-	1    14650 4400
-	1    0    0    -1  
-$EndComp
 Wire Notes Line
 	10900 2300 10900 4950
 Wire Notes Line
@@ -1169,12 +1186,6 @@ Wire Wire Line
 	2550 3350 2550 4500
 Wire Wire Line
 	900  3200 1650 3200
-Text GLabel 5600 3050 2    60   UnSpc ~ 0
-SW6M
-Text GLabel 6300 2900 0    60   UnSpc ~ 0
-SW6A
-Text GLabel 6300 3200 0    60   UnSpc ~ 0
-SW6B
 Wire Notes Line
 	5550 2800 5550 3300
 Wire Notes Line
@@ -1200,12 +1211,6 @@ Wire Wire Line
 	9850 4350 9850 2650
 Wire Wire Line
 	9850 2650 8150 2650
-Text GLabel 11150 3650 2    60   UnSpc ~ 0
-SW6M
-Text GLabel 11850 3500 0    60   UnSpc ~ 0
-SW6A
-Text GLabel 11850 3800 0    60   UnSpc ~ 0
-SW6B
 Wire Notes Line
 	11100 3400 11100 3900
 Wire Notes Line
@@ -1226,4 +1231,18 @@ Connection ~ 9850 3650
 Wire Wire Line
 	13800 3200 14650 3200
 Connection ~ 14050 3200
+Wire Notes Line
+	5200 7700 5200 8200
+Wire Notes Line
+	5200 8200 6050 8200
+Wire Notes Line
+	6050 8200 6050 7700
+Wire Notes Line
+	6050 7700 5200 7700
+Wire Wire Line
+	5050 7950 5250 7950
+Wire Wire Line
+	7000 8100 5950 8100
+Wire Wire Line
+	6300 7800 5950 7800
 $EndSCHEMATC

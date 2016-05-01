@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0  Date: dom 01 mag 2016 15:07:54 CEST
+#
+$CMP AD5206
+D AD5206
+K DIGIPOT
+$ENDCMP
+#
+#End Doc Library

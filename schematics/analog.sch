@@ -29,12 +29,13 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:analog-cache
 EELAYER 27 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title "MIDI controlled (via Arduino) distortion unit"
+Title "PREAMPino overdrive unit"
 Date "25 apr 2016"
 Rev "2"
 Comp ""
