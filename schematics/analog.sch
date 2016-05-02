@@ -36,7 +36,7 @@ $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
 Title "PREAMPino overdrive unit"
-Date "25 apr 2016"
+Date "2 may 2016"
 Rev "2"
 Comp ""
 Comment1 "Bazz Fuss -> Electra Dist -> Tillman Preamp -> TwinCaster -> Cromesphere Buffer"
@@ -823,9 +823,9 @@ SW6B
 Text GLabel 5250 7950 2    60   UnSpc ~ 0
 SW6M
 Text GLabel 5950 7800 0    60   UnSpc ~ 0
-SW6A
-Text GLabel 5950 8100 0    60   UnSpc ~ 0
 SW6B
+Text GLabel 5950 8100 0    60   UnSpc ~ 0
+SW6A
 Connection ~ 3650 9800
 Wire Wire Line
 	3650 9800 3650 9200
