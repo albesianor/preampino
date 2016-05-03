@@ -122,7 +122,7 @@ void Device::load() {
   setVC2Gain(EEPROM.read(mem_index+4));
   setVCVolume(EEPROM.read(mem_index+5));
 
-  boolean* boolarray = byte2bool(EEPROM.read(mem_index+6));
+  boolean* boolarray = byte2bool(EEPROM.read(mem_index+6), 6);
   setFuzz(boolarray[0]);
   setDist(boolarray[1]);
   setClipUp(boolarray[2]);
@@ -149,7 +149,7 @@ void Device::save() {
   EEPROM.write(mem_index+5, _vc_volume);
 
   boolean boolarray [6] = {_fuzz, _dist, _clip_up, _clip_down, _boost, _vc2};
-  EEPROM.write(mem_index+6, bool2byte(boolarray));
+  EEPROM.write(mem_index+6, bool2byte(boolarray, 6));
 
   EEPROM.write(LASTPATCH, _address);
 

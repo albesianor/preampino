@@ -27,7 +27,7 @@ inline void digitalPotWrite(int address, int value) {
 
 // ---------------------------------------------------------
 // bool array to byte converter
-inline byte bool2byte(boolean* input, byte dim = 6) {
+inline byte bool2byte(boolean* input, byte dim = 8) {
 
   byte output = 0;
 
@@ -43,7 +43,7 @@ inline byte bool2byte(boolean* input, byte dim = 6) {
 }
 
 // byte to bool array converter
-inline boolean* byte2bool(byte input, byte dim = 6) {
+inline boolean* byte2bool(byte input, byte dim = 8) {
 
   boolean* output = new boolean[dim];
 
