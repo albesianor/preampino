@@ -35,11 +35,10 @@ cache:
 
 install:
    - pip install -U platformio
-   - platformio ci --project-conf=/firmware/platformio.ini
-
+ 
 script:
    - platformio run
-
+   - platformio ci --projrun-conf=/firmware/platformio.ini
 
 #
 # Template #2: The project is intended to by used as a library with examples
