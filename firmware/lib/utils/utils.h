@@ -31,7 +31,7 @@ inline byte bool2byte(boolean* input, byte dim = 8) {
 
   byte output = 0;
 
-  // bitwise conversion (see http://http://playground.arduino.cc/Code/BitMath)
+  // bitwise conversion (see http://playground.arduino.cc/Code/BitMath)
   for(byte i = 0; i < dim; i++) {
     // if input[i] is true, toggles output i-th byte (actually,
     // as output is initially 0, it sets its i-th byte to true)
@@ -47,7 +47,7 @@ inline boolean* byte2bool(byte input, byte dim = 8) {
 
   boolean* output = new boolean[dim];
 
-  // bitwise conversion (see http://http://playground.arduino.cc/Code/BitMath)
+  // bitwise conversion (see http://playground.arduino.cc/Code/BitMath)
   // sets output[i] to i-th byte
   for(byte i = 0; i < dim; i++) output[i] = input & (1<<i);
 
