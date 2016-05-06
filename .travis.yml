@@ -37,8 +37,8 @@ install:
    - pip install -U platformio
  
 script:
-   - platformio run
    - platformio ci --projrun-conf=/firmware/platformio.ini
+   - platformio run
 
 #
 # Template #2: The project is intended to by used as a library with examples
