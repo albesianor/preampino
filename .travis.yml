@@ -34,6 +34,7 @@ cache:
        - "~/firmware/.platformio"
 
 install:
+   - platformio ci --project-conf=/firmware/platformio.ini
    - pip install -U platformio
 
 script:
