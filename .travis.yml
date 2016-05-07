@@ -44,7 +44,7 @@ install:
    - unzip /tmp/EnableInterrupt.zip -d /tmp/
 
 script:
-   - platformio ci --lib="/tmp/EnableInterrupt-master" --project-conf="./firmware/platformio.ini"
+   - platformio ci --lib="/tmp/EnableInterrupt-master" --project-conf="./firmware/platformio.ini" --board=megaatmmega2560
    - platformio run --project-dir=./firmware
 
 #
