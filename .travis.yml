@@ -36,8 +36,15 @@ cache:
 install:
    - pip install -U platformio
 
+   # install MIDI library
+   - platformio lib install 62
+
+   # download and install EnableInterrupt library
+   - wget https://github.com/GreyGnome/EnableInterrupt/archive/master.zip -O /tmp/EnableInterrupt.zip
+   - unzip /tmp/EnableInterrupt.zip -d /tmp/
+
 script:
-   - platformio ci --project-conf="./firmware/platformio.ini"
+   - platformio ci --lib="/tmp/EnableInterrupt-master" --project-conf="./firmware/platformio.ini"
    - platformio run --project-dir=./firmware
 
 #
