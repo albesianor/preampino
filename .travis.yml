@@ -38,7 +38,7 @@ install:
 
 script:
    - platformio ci --project-conf="./firmware/platformio.ini"
-   - platformio run
+   - platformio run --project-dir=./firmware
 
 #
 # Template #2: The project is intended to by used as a library with examples
