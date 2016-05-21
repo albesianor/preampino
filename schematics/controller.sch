@@ -37,7 +37,7 @@ $Descr A2 23386 16535
 encoding utf-8
 Sheet 1 1
 Title "PREAMPino control unit"
-Date "1 may 2016"
+Date "13 may 2016"
 Rev "1"
 Comp ""
 Comment1 "6 digipots + 6 analog switches"
@@ -516,9 +516,9 @@ ValveCaster\nGain 2
 Text Notes 19100 2050 0    60   Italic 0
 ValveCaster\nVolume
 Text GLabel 19000 2850 0    60   Input ~ 0
-ICSP-4
+51
 Text GLabel 19650 2950 0    60   Input ~ 0
-ICSP-3
+52
 Text Notes 14250 6500 0    60   ~ 0
 Down\n
 Text Notes 14250 6200 0    60   ~ 0
