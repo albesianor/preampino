@@ -19,6 +19,7 @@ class BankModel(QtCore.QAbstractTableModel):
         self.__bank = bank
         self.__headers = headers
         self.__title = ""
+        self.__lastopen = ""
         
     def rowCount(self, parent):
         return len(self.__bank)
@@ -71,6 +72,7 @@ class BankModel(QtCore.QAbstractTableModel):
     def newBank(self):
         self.__bank = [["", False, 0, False, False, False, 0, False, 0, 0, False, 0, 0] for dummy in range(200)]
         self.__title = ""
+        self.__lastopen = ""
     
     """ INPUT: string """
     def writeXml(self, filename):
@@ -123,6 +125,8 @@ class BankModel(QtCore.QAbstractTableModel):
         
         doc.writeEndElement()
         doc.writeEndDocument()
+        
+        self.__lastopen = filename
         
     """ INPUT: string"""
     def readXml(self, filename):
@@ -201,8 +205,12 @@ class BankModel(QtCore.QAbstractTableModel):
                     
                     else:
                         doc.skipCurrentElement()
+                                
+                self.__lastopen = filename
             
             else:
                 print("ERROR: this is not a PREAMPino Client bank file!")
     
+    def getLastOpen(self):
+        return self.__lastopen
     

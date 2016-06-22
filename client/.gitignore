@@ -1,1 +1,3 @@
 *.pbk
+*.ini
+__pycache__
